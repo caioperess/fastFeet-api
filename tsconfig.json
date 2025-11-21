@@ -5,9 +5,12 @@
     "target": "es2022",
 
     "strict": true,
+    "strictPropertyInitialization": false,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "moduleResolution": "node16",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "rootDir": ".",
     "outDir": "./dist",
 
