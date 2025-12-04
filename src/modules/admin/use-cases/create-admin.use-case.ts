@@ -1,5 +1,5 @@
-import { EUserRole } from '@/modules/users/enums/role-enum'
 import { hash } from 'bcryptjs'
+import { EUserRole } from '@/modules/users/enums/role-enum'
 import { AdminEntity } from '../infra/typeorm/entities/admin'
 import type { AdminRepository } from '../repositories/admin-repository'
 import { AdminAlreadyExistsError } from './errors/admin-already-exists'

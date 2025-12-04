@@ -1,6 +1,6 @@
+import type { FastifyReply, FastifyRequest } from 'fastify'
 import { jwtConfig } from '@/config/jwt'
 import { makeAuthenticateUserUseCase } from '@/modules/users/use-cases/factories/make-authenticate-use-case'
-import type { FastifyReply, FastifyRequest } from 'fastify'
 
 export async function authenticateController(req: FastifyRequest, reply: FastifyReply) {
 	try {

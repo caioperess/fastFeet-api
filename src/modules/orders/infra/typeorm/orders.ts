@@ -1,8 +1,8 @@
+import { randomUUID } from 'node:crypto'
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
 import { Recipient } from '@/modules/recipients/infra/typeorm/entities/recipients'
 import { User } from '@/modules/users/infra/typeorm/entities/user'
 import type { Optional } from '@/types/optional'
-import { randomUUID } from 'node:crypto'
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
 import { EOrderStatusEnum } from '../../enums/status-enum'
 
 export interface IOrdersProps {

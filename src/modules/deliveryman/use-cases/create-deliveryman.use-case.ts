@@ -1,5 +1,5 @@
-import { EUserRole } from '@/modules/users/enums/role-enum'
 import { hash } from 'bcryptjs'
+import { EUserRole } from '@/modules/users/enums/role-enum'
 import { Deliveryman } from '../infra/typeorm/entities/deliveryman'
 import type { DeliverymanRepository } from '../repositories/deliveryman-repository'
 import { DeliverymanAlreadyExistsError } from './errors/deliveryman-already-exists'
