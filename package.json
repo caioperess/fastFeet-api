@@ -7,14 +7,18 @@
     "dev": "tsx watch src/server.ts",
     "start": "node dist/server.cjs",
     "build": "tsup src",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "lint": "biome check --write"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fastify/awilix": "8.2.0",
     "@fastify/cookie": "11.0.2",
     "@fastify/jwt": "10.0.0",
+    "awilix": "12.0.5",
     "bcryptjs": "3.0.2",
     "dotenv": "17.2.3",
     "fastify": "5.6.1",

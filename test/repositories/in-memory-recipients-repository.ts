@@ -2,25 +2,25 @@ import type { Recipient } from '@/modules/recipients/infra/typeorm/entities/reci
 import type { RecipientsRepository } from '@/modules/recipients/repositories/recipients-repository'
 
 export class InMemoryRecipientsRepository implements RecipientsRepository {
-	public recipients: Recipient[] = []
+	public items: Recipient[] = []
 
 	async create(recipients: Recipient): Promise<Recipient> {
-		this.recipients.push(recipients)
+		this.items.push(recipients)
 		return recipients
 	}
 
 	async save(recipients: Recipient): Promise<Recipient> {
-		const recipientIndex = this.recipients.findIndex((r) => r.id === recipients.id)
-		this.recipients[recipientIndex] = recipients
+		const recipientIndex = this.items.findIndex((r) => r.id === recipients.id)
+		this.items[recipientIndex] = recipients
 
 		return recipients
 	}
 
 	async delete(id: string): Promise<void> {
-		this.recipients = this.recipients.filter((r) => r.id !== id)
+		this.items = this.items.filter((r) => r.id !== id)
 	}
 
 	async findById(id: string): Promise<Recipient | null> {
-		return this.recipients.find((r) => r.id === id) || null
+		return this.items.find((r) => r.id === id) || null
 	}
 }

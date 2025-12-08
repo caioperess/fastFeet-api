@@ -1,0 +1,13 @@
+# Use Cases
+- [x] Authenticate admin and deliveryman
+- [x] CRUD admin
+- [x] CRUD deliveryman
+- [x] CRUD recipients
+- [x] CRUD orders
+- [x] Update order status to AVAILABLE
+- [x] Deliveryman withdrawn order
+- [x] Deliveryman deliver order with a photo
+- [x] Return ORDER
+- [x] Fetch orders close to deliveryman
+- [x] Fetch all deliveryman orders
+- [ ] Send notification with order update status to recipient

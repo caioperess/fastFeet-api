@@ -1,16 +1,25 @@
-import { randomUUID } from 'node:crypto'
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { Deliveryman } from '@/modules/deliveryman/infra/typeorm/entities/deliveryman'
 import { Recipient } from '@/modules/recipients/infra/typeorm/entities/recipients'
-import { User } from '@/modules/users/infra/typeorm/entities/user'
 import type { Optional } from '@/types/optional'
-import { EOrderStatusEnum } from '../../enums/status-enum'
+import { randomUUID } from 'node:crypto'
+import {
+	Column,
+	CreateDateColumn,
+	Entity,
+	ManyToOne,
+	OneToMany,
+	PrimaryGeneratedColumn,
+	UpdateDateColumn,
+} from 'typeorm'
+import { EOrderStatusEnum, type OrderStatus } from '../../enums/status-enum'
+import { DeliveryEvents } from './delivery-events'
 
 export interface IOrdersProps {
-	status: EOrderStatusEnum
+	status: OrderStatus
 	productName: string
 	recipientId: string
 	deliverymanId?: string
-	deliveryPhotoId: string
+	deliveryPhotoId?: string
 	withdrawnAt?: Date
 	returnedAt?: Date
 	deliveredAt?: Date
@@ -28,7 +37,7 @@ export class Order {
 		enum: EOrderStatusEnum,
 		default: EOrderStatusEnum.PENDING,
 	})
-	status: EOrderStatusEnum
+	status: OrderStatus
 
 	@Column({ type: 'varchar', name: 'product_name' })
 	productName: string
@@ -46,19 +55,33 @@ export class Order {
 	deliveryPhotoId?: string
 
 	@Column({ type: 'varchar', name: 'recipient_id' })
-	@OneToOne(() => Recipient)
-	@JoinColumn()
 	recipientId: string
 
+	@ManyToOne(
+		() => Recipient,
+		(recipient) => recipient.orders,
+	)
+	recipient: Recipient
+
 	@Column({ type: 'varchar', name: 'deliveryman_id', nullable: true })
-	@OneToOne(() => User)
-	@JoinColumn()
 	deliverymanId?: string
 
-	@Column({ type: 'timestamp', name: 'created_at' })
+	@ManyToOne(
+		() => Deliveryman,
+		(deliveryman) => deliveryman.orders,
+	)
+	deliveryman: Deliveryman
+
+	@OneToMany(
+		() => DeliveryEvents,
+		(deliveryEvents) => deliveryEvents.orderId,
+	)
+	events: DeliveryEvents[]
+
+	@CreateDateColumn({ name: 'created_at' })
 	createdAt: Date
 
-	@Column({ type: 'timestamp', name: 'updated_at' })
+	@UpdateDateColumn({ name: 'updated_at' })
 	updatedAt: Date
 
 	static create(props: Optional<IOrdersProps, 'createdAt' | 'updatedAt'>, id?: string) {

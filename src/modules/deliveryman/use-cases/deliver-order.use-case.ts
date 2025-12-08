@@ -1,4 +1,7 @@
+import { EDeliveryEventsStatusEnum } from '@/modules/orders/enums/delivery-events-status-enum'
 import { EOrderStatusEnum } from '@/modules/orders/enums/status-enum'
+import { DeliveryEvents } from '@/modules/orders/infra/typeorm/delivery-events'
+import type { DeliveryEventsRepository } from '@/modules/orders/repositories/delivery-events-repository'
 import type { OrdersRepository } from '@/modules/orders/repositories/orders-repository'
 import { OrderNotAvailableForDeliverError } from '@/modules/orders/use-cases/errors/order-not-available-for-deliver'
 import { OrderNotFoundError } from '@/modules/orders/use-cases/errors/order-not-found'
@@ -14,6 +17,7 @@ interface IDeliverOrderUseCaseParams {
 export class DeliverOrderUseCase {
 	constructor(
 		private readonly deliverymanRepository: DeliverymanRepository,
+		private readonly deliveryEventsRepository: DeliveryEventsRepository,
 		private readonly orderRepository: OrdersRepository,
 	) {}
 
@@ -41,6 +45,14 @@ export class DeliverOrderUseCase {
 		order.status = EOrderStatusEnum.DELIVERED
 		order.deliveryPhotoId = deliveryPhotoId
 
+		const deliveryEvent = DeliveryEvents.create({
+			orderId,
+			userId: deliverymanId,
+			status: EDeliveryEventsStatusEnum.DELIVERED,
+			timestamp: new Date(),
+		})
+
 		await this.orderRepository.save(order)
+		await this.deliveryEventsRepository.create(deliveryEvent)
 	}
 }

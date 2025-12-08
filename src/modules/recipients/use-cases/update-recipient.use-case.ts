@@ -8,6 +8,7 @@ export interface IUpdateRecipientUseCaseParams {
 	city: string
 	state: string
 	zipCode: string
+	email: string
 	number: string
 	complement?: string
 	latitude: number

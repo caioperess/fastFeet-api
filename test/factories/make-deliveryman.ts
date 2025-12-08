@@ -1,19 +1,19 @@
-import { AdminEntity } from '@/modules/admin/infra/typeorm/entities/admin'
+import { Deliveryman } from '@/modules/deliveryman/infra/typeorm/entities/deliveryman'
 import { EUserRole } from '@/modules/users/enums/role-enum'
 import { faker } from '@faker-js/faker'
 
-export function makeAdmin(override?: Partial<AdminEntity>, id?: string) {
-	const admin = AdminEntity.create(
+export function makeDeliveryman(override?: Partial<Deliveryman>, id?: string) {
+	const deliveryman = Deliveryman.create(
 		{
 			name: faker.person.firstName(),
 			cpf: faker.string.numeric(11),
 			passwordHash: faker.internet.password(),
-			role: EUserRole.ADMIN,
+			role: EUserRole.DELIVERYMAN,
 			phone: faker.phone.number(),
 			...override,
 		},
 		id,
 	)
 
-	return admin
+	return deliveryman
 }

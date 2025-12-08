@@ -6,6 +6,7 @@ export interface ICreateRecipientUseCaseParams {
 	neighborhood: string
 	city: string
 	state: string
+	email: string
 	zipCode: string
 	number: string
 	complement?: string

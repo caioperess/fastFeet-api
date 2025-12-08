@@ -1,12 +1,12 @@
-import { jwtConfig } from '@/config/jwt'
-import { AuthenticateUserUseCase } from '@/modules/users/use-cases/authenticate.use-case'
 import type { FastifyReply, FastifyRequest } from 'fastify'
+import { jwtConfig } from '@/config/jwt'
+import { makeAuthenticateUserUseCase } from '@/modules/users/use-cases/factories/make-authenticate-use-case'
 
 export async function authenticateController(req: FastifyRequest, reply: FastifyReply) {
 	try {
 		const { cpf, password } = req.body as any
 
-		const authenticateUserUseCase = new AuthenticateUserUseCase()
+		const authenticateUserUseCase = makeAuthenticateUserUseCase()
 
 		const { user } = await authenticateUserUseCase.execute({ cpf, password })
 
