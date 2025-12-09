@@ -1,12 +1,14 @@
-import { jwtConfig } from '@/config/jwt'
-import { AuthenticateUserUseCase } from '@/modules/users/use-cases/authenticate.use-case'
 import type { FastifyReply, FastifyRequest } from 'fastify'
+import { jwtConfig } from '@/config/jwt'
+import type { TypeOrmUsersRepository } from '@/modules/users/infra/typeorm/repositories/typeorm-users-repository'
+import { AuthenticateUserUseCase } from '@/modules/users/use-cases/authenticate.use-case'
 
 export async function authenticateController(req: FastifyRequest, reply: FastifyReply) {
 	try {
 		const { cpf, password } = req.body as any
 
-		const authenticateUserUseCase = new AuthenticateUserUseCase()
+		const usersRepository = req.diScope.resolve<TypeOrmUsersRepository>('usersRepository')
+		const authenticateUserUseCase = new AuthenticateUserUseCase(usersRepository)
 
 		const { user } = await authenticateUserUseCase.execute({ cpf, password })
 

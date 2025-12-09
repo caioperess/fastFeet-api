@@ -1,4 +1,3 @@
-import { DeliverymanNotFoundError } from '@/modules/deliveryman/use-cases/errors/deliveryman-not-found'
 import { expect } from 'node_modules/vitest/dist'
 import { makeDeliveryman } from 'test/factories/make-deliveryman'
 import { makeOrder } from 'test/factories/make-order'
@@ -6,6 +5,7 @@ import { makeRecipient } from 'test/factories/make-recipient'
 import { InMemoryOrdersRepository } from 'test/repositories/in-memory-orders-repository'
 import { InMemoryRecipientsRepository } from 'test/repositories/in-memory-recipients-repository'
 import { InMemoryUsersRepository } from 'test/repositories/in-memory-users-repository'
+import { DeliverymanNotFoundError } from '@/modules/deliveryman/use-cases/errors/deliveryman-not-found'
 import { EOrderStatusEnum } from '../enums/status-enum'
 import { FetchNearbyOrdersByDeliverymanUseCase } from './fetch-nearby-orders-by-deliveryman.use-case'
 

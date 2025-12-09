@@ -1,6 +1,5 @@
-import { Order } from '@/modules/orders/infra/typeorm/orders'
 import { randomUUID } from 'node:crypto'
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
 
 export interface IRecipientsProps {
 	name: string
@@ -63,12 +62,6 @@ export class Recipient {
 		scale: 8,
 	})
 	longitude: number
-
-	@OneToMany(
-		() => Order,
-		(order) => order.recipientId,
-	)
-	orders: Order[]
 
 	static create(props: IRecipientsProps, id?: string) {
 		return new Recipient(props, id)

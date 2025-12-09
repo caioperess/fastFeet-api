@@ -1,18 +1,9 @@
+import { randomUUID } from 'node:crypto'
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
 import { Deliveryman } from '@/modules/deliveryman/infra/typeorm/entities/deliveryman'
 import { Recipient } from '@/modules/recipients/infra/typeorm/entities/recipients'
 import type { Optional } from '@/types/optional'
-import { randomUUID } from 'node:crypto'
-import {
-	Column,
-	CreateDateColumn,
-	Entity,
-	ManyToOne,
-	OneToMany,
-	PrimaryGeneratedColumn,
-	UpdateDateColumn,
-} from 'typeorm'
 import { EOrderStatusEnum, type OrderStatus } from '../../enums/status-enum'
-import { DeliveryEvents } from './delivery-events'
 
 export interface IOrdersProps {
 	status: OrderStatus
@@ -57,26 +48,14 @@ export class Order {
 	@Column({ type: 'varchar', name: 'recipient_id' })
 	recipientId: string
 
-	@ManyToOne(
-		() => Recipient,
-		(recipient) => recipient.orders,
-	)
+	@ManyToOne(() => Recipient)
 	recipient: Recipient
 
 	@Column({ type: 'varchar', name: 'deliveryman_id', nullable: true })
 	deliverymanId?: string
 
-	@ManyToOne(
-		() => Deliveryman,
-		(deliveryman) => deliveryman.orders,
-	)
+	@ManyToOne(() => Deliveryman)
 	deliveryman: Deliveryman
-
-	@OneToMany(
-		() => DeliveryEvents,
-		(deliveryEvents) => deliveryEvents.orderId,
-	)
-	events: DeliveryEvents[]
 
 	@CreateDateColumn({ name: 'created_at' })
 	createdAt: Date

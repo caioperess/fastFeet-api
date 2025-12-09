@@ -8,7 +8,7 @@ const AppDataSource = new DataSource({
 	password: 'fastfeet',
 	database: 'fastfeet',
 	entities: ['./src/modules/**/infra/typeorm/entities/*.ts'],
-	migrations: ['./src/shared/infra/typeorm/migrations/*.ts'],
+	migrations: ['./src/shared/infra/database/migrations/*.ts'],
 })
 
 async function initializeDataSource() {

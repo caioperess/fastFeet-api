@@ -1,6 +1,6 @@
+import { faker } from '@faker-js/faker'
 import { AdminEntity } from '@/modules/admin/infra/typeorm/entities/admin'
 import { EUserRole } from '@/modules/users/enums/role-enum'
-import { faker } from '@faker-js/faker'
 
 export function makeAdmin(override?: Partial<AdminEntity>, id?: string) {
 	const admin = AdminEntity.create(

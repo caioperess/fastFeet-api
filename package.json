@@ -9,6 +9,7 @@
     "build": "tsup src",
     "test": "vitest run",
     "test:watch": "vitest",
+    "typeorm": "tsx ./node_modules/typeorm/cli.js",
     "lint": "biome check --write"
   },
   "keywords": [],

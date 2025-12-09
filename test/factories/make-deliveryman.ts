@@ -1,6 +1,6 @@
+import { faker } from '@faker-js/faker'
 import { Deliveryman } from '@/modules/deliveryman/infra/typeorm/entities/deliveryman'
 import { EUserRole } from '@/modules/users/enums/role-enum'
-import { faker } from '@faker-js/faker'
 
 export function makeDeliveryman(override?: Partial<Deliveryman>, id?: string) {
 	const deliveryman = Deliveryman.create(

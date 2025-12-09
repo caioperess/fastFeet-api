@@ -1,6 +1,6 @@
+import type { Repository } from 'typeorm'
 import type { UsersRepository } from '@/modules/users/repositories/users-repository'
 import { AppDataSource } from '@/shared/infra/database'
-import type { Repository } from 'typeorm'
 import { User } from '../entities/user'
 
 export class TypeOrmUsersRepository implements UsersRepository {

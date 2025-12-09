@@ -1,10 +1,15 @@
 import 'reflect-metadata'
 
+import { diContainer, fastifyAwilixPlugin } from '@fastify/awilix'
 import fastifyCookie from '@fastify/cookie'
 import fastifyJwt from '@fastify/jwt'
+import { asClass } from 'awilix'
 import { fastify } from 'fastify'
 import { jwtConfig } from './config/jwt'
+import { TypeOrmRecipientRepository } from './modules/recipients/infra/typeorm/repositories/typeorm-recipient-repository'
+import { TypeOrmUsersRepository } from './modules/users/infra/typeorm/repositories/typeorm-users-repository'
 import { initializeDataSource } from './shared/infra/database'
+import { appRoutes } from './shared/infra/http/routes'
 
 initializeDataSource()
 
@@ -21,7 +26,23 @@ app.register(fastifyJwt, {
 	sign: { expiresIn: jwtConfig.expirationTime },
 })
 
+app.register(fastifyAwilixPlugin, {
+	disposeOnClose: true,
+	disposeOnResponse: true,
+	strictBooleanEnforced: true,
+})
+
+diContainer.register({
+	usersRepository: asClass(TypeOrmUsersRepository).singleton(),
+})
+
+diContainer.register({
+	recipientsRepository: asClass(TypeOrmRecipientRepository).singleton(),
+})
+
 app.register(fastifyCookie)
+
+app.register(appRoutes)
 
 app.listen(
 	{

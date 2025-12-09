@@ -1,6 +1,8 @@
 import type { FastifyInstance } from 'fastify'
-import { authenticateController } from '../controllers/users/authenticate.controller'
+import { recipientsRoutes } from './recipients.routes'
+import { usersRoutes } from './users.routes'
 
-export async function usersRoutes(app: FastifyInstance) {
-	app.post('/session', authenticateController)
+export async function appRoutes(app: FastifyInstance) {
+	app.register(usersRoutes, { prefix: '/users' })
+	app.register(recipientsRoutes, { prefix: '/recipients' })
 }

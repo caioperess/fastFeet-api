@@ -1,5 +1,5 @@
-import { Recipient } from '@/modules/recipients/infra/typeorm/entities/recipients'
 import { faker } from '@faker-js/faker'
+import { Recipient } from '@/modules/recipients/infra/typeorm/entities/recipients'
 
 export function makeRecipient(override?: Partial<Recipient>, id?: string) {
 	const recipient = Recipient.create(

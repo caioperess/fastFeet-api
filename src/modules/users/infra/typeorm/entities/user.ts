@@ -1,6 +1,6 @@
-import { EUserRole } from '@/modules/users/enums/role-enum'
 import { randomUUID } from 'node:crypto'
 import { Column, Entity, Index, PrimaryGeneratedColumn, TableInheritance } from 'typeorm'
+import { EUserRole } from '@/modules/users/enums/role-enum'
 
 export interface IUserProps {
 	name: string
@@ -19,7 +19,7 @@ export class User {
 	@Column('varchar')
 	name: string
 
-	@Column('varchar(11)')
+	@Column('varchar')
 	@Index(['cpf'], { unique: true })
 	cpf: string
 
@@ -36,7 +36,7 @@ export class User {
 	})
 	role: EUserRole
 
-	@Column('varchar(15)')
+	@Column('varchar')
 	phone: string
 
 	static create(props: IUserProps, id?: string) {
