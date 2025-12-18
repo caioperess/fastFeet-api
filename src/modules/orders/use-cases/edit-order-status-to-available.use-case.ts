@@ -1,7 +1,8 @@
 import { EDeliveryEventsStatusEnum } from '../enums/delivery-events-status-enum'
 import { EOrderStatusEnum } from '../enums/status-enum'
-import { DeliveryEvents } from '../infra/typeorm/delivery-events'
-import type { Order } from '../infra/typeorm/orders'
+import { DeliveryEvents } from '../infra/typeorm/entities/delivery-events'
+import type { Order } from '../infra/typeorm/entities/orders'
+
 import type { DeliveryEventsRepository } from '../repositories/delivery-events-repository'
 import type { OrdersRepository } from '../repositories/orders-repository'
 import { OrderNotFoundError } from './errors/order-not-found'

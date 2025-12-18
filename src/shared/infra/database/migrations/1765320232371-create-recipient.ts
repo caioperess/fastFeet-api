@@ -26,6 +26,7 @@ export class CreateRecipient1765320232371 implements MigrationInterface {
 					{
 						name: 'email',
 						type: 'varchar',
+						isUnique: true,
 						isNullable: false,
 					},
 					{

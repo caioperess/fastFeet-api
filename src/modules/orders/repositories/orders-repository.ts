@@ -1,4 +1,4 @@
-import type { Order } from '../infra/typeorm/orders'
+import type { Order } from '../infra/typeorm/entities/orders'
 
 export type FindNearbyOrdersByDeliverymanParams = {
 	deliverymanId: string

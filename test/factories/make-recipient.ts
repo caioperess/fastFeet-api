@@ -1,7 +1,7 @@
+import { type IRecipientsProps, Recipient } from '@/modules/recipients/infra/typeorm/entities/recipients'
 import { faker } from '@faker-js/faker'
-import { Recipient } from '@/modules/recipients/infra/typeorm/entities/recipients'
 
-export function makeRecipient(override?: Partial<Recipient>, id?: string) {
+export function makeRecipient(override?: Partial<IRecipientsProps>, id?: string) {
 	const recipient = Recipient.create(
 		{
 			city: faker.location.city(),

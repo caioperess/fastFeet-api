@@ -27,4 +27,8 @@ export class InMemoryUsersRepository implements UsersRepository {
 	async findByCpf(cpf: string): Promise<User | null> {
 		return this.items.find((u) => u.cpf === cpf) || null
 	}
+
+	async findByPhone(phone: string): Promise<User | null> {
+		return this.items.find((u) => u.phone === phone) || null
+	}
 }

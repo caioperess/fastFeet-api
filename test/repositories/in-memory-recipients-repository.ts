@@ -23,4 +23,8 @@ export class InMemoryRecipientsRepository implements RecipientsRepository {
 	async findById(id: string): Promise<Recipient | null> {
 		return this.items.find((r) => r.id === id) || null
 	}
+
+	async findByEmail(email: string): Promise<Recipient | null> {
+		return this.items.find((r) => r.email === email) || null
+	}
 }

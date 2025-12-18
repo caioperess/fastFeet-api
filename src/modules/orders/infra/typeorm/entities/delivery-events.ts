@@ -1,7 +1,10 @@
+import {
+	type DeliveryEventsStatus,
+	EDeliveryEventsStatusEnum,
+} from '@/modules/orders/enums/delivery-events-status-enum'
+import { User } from '@/modules/users/infra/typeorm/entities/user'
 import { randomUUID } from 'node:crypto'
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
-import { User } from '@/modules/users/infra/typeorm/entities/user'
-import { type DeliveryEventsStatus, EDeliveryEventsStatusEnum } from '../../enums/delivery-events-status-enum'
 import { Order } from './orders'
 
 export interface IDeliveryEventsProps {

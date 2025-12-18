@@ -11,7 +11,7 @@ export interface IUpdateUserUseCaseParams {
 export class UpdateUserUseCase {
 	constructor(private readonly usersRepository: UsersRepository) {}
 
-	async execute({ id, name, cpf, phone }: IUpdateUserUseCaseParams): Promise<void> {
+	async execute({ id, name, cpf, phone }: IUpdateUserUseCaseParams) {
 		const user = await this.usersRepository.findById(id)
 
 		if (!user) {
@@ -21,5 +21,7 @@ export class UpdateUserUseCase {
 		Object.assign(user, { name, cpf, phone })
 
 		await this.usersRepository.save(user)
+
+		return { user }
 	}
 }

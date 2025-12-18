@@ -1,6 +1,6 @@
-import type { Repository } from 'typeorm'
 import type { UsersRepository } from '@/modules/users/repositories/users-repository'
 import { AppDataSource } from '@/shared/infra/database'
+import type { Repository } from 'typeorm'
 import { User } from '../entities/user'
 
 export class TypeOrmUsersRepository implements UsersRepository {
@@ -12,8 +12,7 @@ export class TypeOrmUsersRepository implements UsersRepository {
 
 	async create(data: User): Promise<User> {
 		const user = this.repository.create(data)
-		await this.repository.save(user)
-		return user
+		return await this.repository.save(user)
 	}
 
 	async save(user: User): Promise<User> {
@@ -25,14 +24,14 @@ export class TypeOrmUsersRepository implements UsersRepository {
 	}
 
 	async findById(id: string): Promise<User | null> {
-		const user = await this.repository.findOne({ where: { id } })
-
-		return user
+		return await this.repository.findOne({ where: { id } })
 	}
 
 	async findByCpf(cpf: string): Promise<User | null> {
-		const user = await this.repository.findOne({ where: { cpf } })
+		return await this.repository.findOne({ where: { cpf } })
+	}
 
-		return user
+	async findByPhone(phone: string): Promise<User | null> {
+		return await this.repository.findOneBy({ phone })
 	}
 }

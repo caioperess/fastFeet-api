@@ -1,6 +1,6 @@
 import { EDeliveryEventsStatusEnum } from '@/modules/orders/enums/delivery-events-status-enum'
 import { EOrderStatusEnum } from '@/modules/orders/enums/status-enum'
-import { DeliveryEvents } from '@/modules/orders/infra/typeorm/delivery-events'
+import { DeliveryEvents } from '@/modules/orders/infra/typeorm/entities/delivery-events'
 import type { DeliveryEventsRepository } from '@/modules/orders/repositories/delivery-events-repository'
 import type { OrdersRepository } from '@/modules/orders/repositories/orders-repository'
 import { OrderNotAvailableForWithdrawnError } from '@/modules/orders/use-cases/errors/order-not-available-for-withdrawn'

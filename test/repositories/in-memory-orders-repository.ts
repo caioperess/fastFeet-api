@@ -1,6 +1,6 @@
 import { searchOrderRadiusInKm } from '@/config/search-order-radius'
 import { EOrderStatusEnum } from '@/modules/orders/enums/status-enum'
-import type { Order } from '@/modules/orders/infra/typeorm/orders'
+import type { Order } from '@/modules/orders/infra/typeorm/entities/orders'
 import type {
 	FindNearbyOrdersByDeliverymanParams,
 	OrdersRepository,

@@ -5,4 +5,5 @@ export abstract class RecipientsRepository {
 	abstract save(recipients: Recipient): Promise<Recipient>
 	abstract delete(id: string): Promise<void>
 	abstract findById(id: string): Promise<Recipient | null>
+	abstract findByEmail(email: string): Promise<Recipient | null>
 }

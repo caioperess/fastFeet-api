@@ -1,6 +1,6 @@
 import type { DeliverymanRepository } from '@/modules/deliveryman/repositories/deliveryman-repository'
 import { DeliverymanNotFoundError } from '@/modules/deliveryman/use-cases/errors/deliveryman-not-found'
-import type { Order } from '../infra/typeorm/orders'
+import type { Order } from '../infra/typeorm/entities/orders'
 import type { OrdersRepository } from '../repositories/orders-repository'
 
 interface FetchNearbyOrdersByDeliverymanUseCaseParams {

@@ -1,6 +1,6 @@
-import type { Repository } from 'typeorm'
 import type { RecipientsRepository } from '@/modules/recipients/repositories/recipients-repository'
 import { AppDataSource } from '@/shared/infra/database'
+import type { Repository } from 'typeorm'
 import { Recipient } from '../entities/recipients'
 
 export class TypeOrmRecipientRepository implements RecipientsRepository {
@@ -25,5 +25,9 @@ export class TypeOrmRecipientRepository implements RecipientsRepository {
 
 	async findById(id: string): Promise<Recipient | null> {
 		return await this.repository.findOneBy({ id })
+	}
+
+	async findByEmail(email: string): Promise<Recipient | null> {
+		return await this.repository.findOneBy({ email })
 	}
 }

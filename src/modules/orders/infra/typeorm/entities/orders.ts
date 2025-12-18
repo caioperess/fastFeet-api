@@ -1,9 +1,9 @@
-import { randomUUID } from 'node:crypto'
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
 import { Deliveryman } from '@/modules/deliveryman/infra/typeorm/entities/deliveryman'
+import { EOrderStatusEnum, type OrderStatus } from '@/modules/orders/enums/status-enum'
 import { Recipient } from '@/modules/recipients/infra/typeorm/entities/recipients'
 import type { Optional } from '@/types/optional'
-import { EOrderStatusEnum, type OrderStatus } from '../../enums/status-enum'
+import { randomUUID } from 'node:crypto'
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
 
 export interface IOrdersProps {
 	status: OrderStatus

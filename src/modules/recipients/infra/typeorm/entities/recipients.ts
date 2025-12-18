@@ -22,7 +22,7 @@ export class Recipient {
 	@Column('varchar')
 	name: string
 
-	@Column('varchar')
+	@Column({ type: 'varchar', unique: true })
 	email: string
 
 	@Column('varchar')

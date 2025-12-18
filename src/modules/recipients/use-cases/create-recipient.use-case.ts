@@ -1,5 +1,6 @@
 import { Recipient } from '../infra/typeorm/entities/recipients'
 import type { RecipientsRepository } from '../repositories/recipients-repository'
+import { RecipientEmailAlreadyInUseError } from './errors/email-already-in-use'
 
 export interface ICreateRecipientUseCaseParams {
 	name: string
@@ -17,9 +18,17 @@ export interface ICreateRecipientUseCaseParams {
 export class CreateRecipientUseCase {
 	constructor(private readonly recipientsRepository: RecipientsRepository) {}
 
-	async execute(data: ICreateRecipientUseCaseParams): Promise<void> {
+	async execute(data: ICreateRecipientUseCaseParams) {
+		const hasRecipientWithSameEmail = await this.recipientsRepository.findByEmail(data.email)
+
+		if (hasRecipientWithSameEmail) {
+			throw new RecipientEmailAlreadyInUseError()
+		}
+
 		const recipient = Recipient.create(data)
 
 		await this.recipientsRepository.create(recipient)
+
+		return { recipient }
 	}
 }

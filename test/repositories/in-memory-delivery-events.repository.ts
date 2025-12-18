@@ -1,4 +1,4 @@
-import { DeliveryEvents } from '@/modules/orders/infra/typeorm/delivery-events'
+import { DeliveryEvents } from '@/modules/orders/infra/typeorm/entities/delivery-events'
 import type { DeliveryEventsRepository } from '@/modules/orders/repositories/delivery-events-repository'
 
 export class InMemoryDeliveryEventsRepository implements DeliveryEventsRepository {
@@ -8,12 +8,14 @@ export class InMemoryDeliveryEventsRepository implements DeliveryEventsRepositor
 		return this.items.find((deliveryEvent) => deliveryEvent.id === id) ?? null
 	}
 
-	async findByOrderId(orderId: string): Promise<DeliveryEvents[]> {
+	async findManyByOrderId(orderId: string): Promise<DeliveryEvents[]> {
 		return this.items.filter((deliveryEvent) => deliveryEvent.orderId === orderId)
 	}
 
-	async create(deliveryEvents: DeliveryEvents): Promise<void> {
+	async create(deliveryEvents: DeliveryEvents): Promise<DeliveryEvents> {
 		const deliveryEvent = DeliveryEvents.create(deliveryEvents)
 		this.items.push(deliveryEvent)
+
+		return deliveryEvent
 	}
 }

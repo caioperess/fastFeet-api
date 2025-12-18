@@ -1,5 +1,5 @@
-import { hash } from 'bcryptjs'
 import { EUserRole } from '@/modules/users/enums/role-enum'
+import { hash } from 'bcryptjs'
 import { Deliveryman } from '../infra/typeorm/entities/deliveryman'
 import type { DeliverymanRepository } from '../repositories/deliveryman-repository'
 import { DeliverymanAlreadyExistsError } from './errors/deliveryman-already-exists'
@@ -15,9 +15,15 @@ export class CreateDeliverymanUseCase {
 	constructor(private readonly deliverymanRepository: DeliverymanRepository) {}
 
 	async execute({ name, cpf, password, phone }: CreateDeliverymanUseCaseParams) {
-		const userAlreadyExists = await this.deliverymanRepository.findByCpf(cpf)
+		const userWithSameCPF = await this.deliverymanRepository.findByCpf(cpf)
 
-		if (userAlreadyExists) {
+		if (userWithSameCPF) {
+			throw new DeliverymanAlreadyExistsError()
+		}
+
+		const userWithSamePhone = await this.deliverymanRepository.findByPhone(phone)
+
+		if (userWithSamePhone) {
 			throw new DeliverymanAlreadyExistsError()
 		}
 

@@ -10,7 +10,7 @@ export interface IChangeUserPasswordUseCaseParams {
 export class ChangeUserPasswordUseCase {
 	constructor(private readonly usersRepository: UsersRepository) {}
 
-	async execute({ id, password }: IChangeUserPasswordUseCaseParams): Promise<void> {
+	async execute({ id, password }: IChangeUserPasswordUseCaseParams) {
 		const user = await this.usersRepository.findById(id)
 
 		if (!user) {
@@ -20,5 +20,7 @@ export class ChangeUserPasswordUseCase {
 		user.passwordHash = await hash(password, 8)
 
 		await this.usersRepository.save(user)
+
+		return { user }
 	}
 }

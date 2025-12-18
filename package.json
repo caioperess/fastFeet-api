@@ -7,10 +7,11 @@
     "dev": "tsx watch src/server.ts",
     "start": "node dist/server.cjs",
     "build": "tsup src",
+    "typeorm": "tsx ./node_modules/typeorm/cli.js",
+    "lint": "biome check --write",
     "test": "vitest run",
     "test:watch": "vitest",
-    "typeorm": "tsx ./node_modules/typeorm/cli.js",
-    "lint": "biome check --write"
+    "test:cov": "vitest run --coverage"
   },
   "keywords": [],
   "author": "",
@@ -33,6 +34,7 @@
     "@faker-js/faker": "10.1.0",
     "@types/node": "24.9.2",
     "@types/pg": "8.15.6",
+    "@vitest/coverage-v8": "4.0.16",
     "tsup": "8.5.0",
     "tsx": "4.20.6",
     "typescript": "5.9.3",
