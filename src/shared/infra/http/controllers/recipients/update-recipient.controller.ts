@@ -1,9 +1,10 @@
 import type { TypeOrmRecipientRepository } from '@/modules/recipients/infra/typeorm/repositories/typeorm-recipient-repository'
-import { CreateRecipientUseCase } from '@/modules/recipients/use-cases/create-recipient.use-case'
+import { UpdateRecipientUseCase } from '@/modules/recipients/use-cases/update-recipient.use-case'
 import type { FastifyReply, FastifyRequest } from 'fastify'
 import z from 'zod'
 
-export const createRecipientSchema = z.object({
+export const updateRecipientSchema = z.object({
+	id: z.uuid().nonempty('Field required!'),
 	name: z.string().nonempty('Field required!'),
 	neighborhood: z.string().nonempty('Field required!'),
 	email: z.email().nonempty('Field required!'),
@@ -16,17 +17,18 @@ export const createRecipientSchema = z.object({
 	longitude: z.number().nonoptional('Field required!'),
 })
 
-export async function createRecipientController(
-	req: FastifyRequest<{ Body: z.infer<typeof createRecipientSchema> }>,
+export async function updateRecipientController(
+	req: FastifyRequest<{ Body: z.infer<typeof updateRecipientSchema> }>,
 	reply: FastifyReply,
 ) {
 	const recipientRepository = req.diScope.resolve<TypeOrmRecipientRepository>('recipientsRepository')
 
-	const createRecipientUseCase = new CreateRecipientUseCase(recipientRepository)
+	const updateRecipientUseCase = new UpdateRecipientUseCase(recipientRepository)
 
-	const { name, neighborhood, email, city, state, zipCode, number, complement, latitude, longitude } = req.body
+	const { id, name, neighborhood, email, city, state, zipCode, number, complement, latitude, longitude } = req.body
 
-	await createRecipientUseCase.execute({
+	await updateRecipientUseCase.execute({
+		id,
 		name,
 		neighborhood,
 		email,
@@ -39,5 +41,5 @@ export async function createRecipientController(
 		longitude,
 	})
 
-	return reply.status(201).send()
+	return reply.status(200).send()
 }

@@ -1,6 +1,5 @@
 import type { DeliverymanRepository } from '@/modules/deliveryman/repositories/deliveryman-repository'
 import { DeliverymanNotFoundError } from '@/modules/deliveryman/use-cases/errors/deliveryman-not-found'
-import type { Order } from '../infra/typeorm/entities/orders'
 import type { OrdersRepository } from '../repositories/orders-repository'
 
 interface FetchNearbyOrdersByDeliverymanUseCaseParams {
@@ -15,7 +14,7 @@ export class FetchNearbyOrdersByDeliverymanUseCase {
 		private readonly deliverymanRepository: DeliverymanRepository,
 	) {}
 
-	async execute({ deliverymanId, latitude, longitude }: FetchNearbyOrdersByDeliverymanUseCaseParams): Promise<Order[]> {
+	async execute({ deliverymanId, latitude, longitude }: FetchNearbyOrdersByDeliverymanUseCaseParams) {
 		const deliveryman = await this.deliverymanRepository.findById(deliverymanId)
 
 		if (!deliveryman) {
@@ -28,6 +27,6 @@ export class FetchNearbyOrdersByDeliverymanUseCase {
 			longitude,
 		})
 
-		return orders
+		return { orders }
 	}
 }

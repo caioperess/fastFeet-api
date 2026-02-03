@@ -27,10 +27,10 @@ describe('FetchAllDeliverymanOrderUseCase', () => {
 		await inMemoryUsersRepository.create(deliveryman)
 		await inMemoryOrdersRepository.create(order)
 
-		const result = await sut.execute({ deliverymanId: deliveryman.id })
+		const { orders } = await sut.execute({ deliverymanId: deliveryman.id })
 
-		expect(result).toHaveLength(1)
-		expect(result[0]).toEqual(order)
+		expect(orders).toHaveLength(1)
+		expect(orders[0]).toEqual(order)
 	})
 
 	it('should not be able to fetch all orders of a deliveryman if deliveryman not found', async () => {

@@ -61,7 +61,7 @@ describe('WithdrawnOrderUseCase', () => {
 
 		await inMemoryDeliverymanRepository.create(deliveryman)
 
-		expect(() =>
+		await expect(() =>
 			sut.execute({
 				deliverymanId: deliveryman.id,
 				orderId: 'fake-order-id',
@@ -78,7 +78,7 @@ describe('WithdrawnOrderUseCase', () => {
 		await inMemoryDeliverymanRepository.create(deliveryman)
 		await inMemoryOrdersRepository.create(order)
 
-		expect(() =>
+		await expect(() =>
 			sut.execute({
 				deliverymanId: deliveryman.id,
 				orderId: order.id,
@@ -93,7 +93,7 @@ describe('WithdrawnOrderUseCase', () => {
 
 		await inMemoryOrdersRepository.create(order)
 
-		expect(() =>
+		await expect(() =>
 			sut.execute({
 				deliverymanId: 'fake-deliveryman-id',
 				orderId: order.id,

@@ -38,14 +38,14 @@ describe('FetchNearbyOrdersByDeliverymanUseCase', () => {
 		await inMemoryUsersRepository.create(deliveryman)
 		await inMemoryOrdersRepository.create(order)
 
-		const result = await sut.execute({
+		const { orders } = await sut.execute({
 			deliverymanId: deliveryman.id,
 			latitude: -22.226589,
 			longitude: -49.938774,
 		})
 
-		expect(result).toHaveLength(1)
-		expect(result[0]).toEqual(order)
+		expect(orders).toHaveLength(1)
+		expect(orders[0]).toEqual(order)
 	})
 
 	it('should not be able to fetch an order if its out of search range', async () => {
@@ -64,13 +64,13 @@ describe('FetchNearbyOrdersByDeliverymanUseCase', () => {
 		await inMemoryUsersRepository.create(deliveryman)
 		await inMemoryOrdersRepository.create(order)
 
-		const result = await sut.execute({
+		const { orders } = await sut.execute({
 			deliverymanId: deliveryman.id,
 			latitude: -22.226589,
 			longitude: -49.938774,
 		})
 
-		expect(result).toHaveLength(0)
+		expect(orders).toHaveLength(0)
 	})
 
 	it('should not be able to fetch all orders of a deliveryman if deliveryman not found', async () => {

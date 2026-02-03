@@ -17,6 +17,6 @@ export class FetchAllDeliverymanOrderUseCase {
 
 		const orders = await this.ordersRepository.findByDeliverymanId(deliverymanId)
 
-		return orders
+		return { orders }
 	}
 }

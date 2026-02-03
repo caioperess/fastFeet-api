@@ -1,6 +1,6 @@
+import { EUserRole } from '@/modules/users/enums/role-enum'
 import { randomUUID } from 'node:crypto'
 import { Column, Entity, Index, PrimaryGeneratedColumn, TableInheritance } from 'typeorm'
-import { EUserRole } from '@/modules/users/enums/role-enum'
 
 export interface IUserProps {
 	name: string

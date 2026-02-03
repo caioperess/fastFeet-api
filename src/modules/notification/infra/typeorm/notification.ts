@@ -1,7 +1,7 @@
+import { Order } from '@/modules/orders/infra/typeorm/entities/orders'
+import { Recipient } from '@/modules/recipients/infra/typeorm/entities/recipients'
 import { randomUUID } from 'node:crypto'
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
-import { Order } from '@/modules/orders/infra/typeorm/orders'
-import { Recipient } from '@/modules/recipients/infra/typeorm/entities/recipients'
 
 export interface INotificationProps {
 	recipientId: string
